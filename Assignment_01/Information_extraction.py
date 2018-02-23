@@ -358,15 +358,17 @@ def main():
                        print('NO')
 
     #(Who, travels, where)
-    if q_trip.subject.lower() == 'who' and q_trip.predicate == 'is flying' or q_trip.predicate == 'is going' or q_trip.predicate == 'is traveling':
+    if q_trip.subject.lower() == 'who' and (q_trip.predicate == 'is flying' or q_trip.predicate == 'is going' or q_trip.predicate == 'is traveling'):
         answer = '{} is flying to {}.'
         qdoc = nlp(unicode(question))
-        personname = [str(e.text) for e in qdoc.ents if e.label_ == 'PERSON' or (e.label_ == "ORG")]
+        #personname = [str(e.text) for e in qdoc.ents if e.label_ == 'PERSON' or (e.label_ == "ORG")]
         personplace = [str(e.text) for e in qdoc.ents if e.label_ == 'GPE']
         for person in persons:
-            for trip in person.travels:
-                if trip and trip.departs_to == personplace:
+            p = select_person(person.name)
+            for trip in p.travels:
+                if trip and trip.departs_to == personplace and trip.departs_on:
                     print (person.name)
+
 
     #(When, person, travels, where)
     if 'when' in q_trip.object.lower():
@@ -378,23 +380,11 @@ def main():
         p = select_person(personname[0])
         x=1
         for trip in p.travels:
-                if trip.departs_to == personplace:
+                if trip.departs_to == personplace and trip.departs_on:
                     print(trip.departs_on)
                     x=0
         if x:
             print("Sorry we don;t know")
 
-    #(What's the name of <person>'s <pet_type>)
-    if question.startswith('what'):
-        qdoc = nlp(unicode(question))
-        persono= [str(e.text) for e in qdoc.ents if e.label_ == 'PERSON' or (e.label_ == "ORG")]
-        p = add_person(persono[0])
-        pet_type = 'dog' if 'dog'in question else 'cat'
-        for x in p.has:
-            if x.type == pet_type:
-                print (x.name)
-    else:
-        IE= ClausIE.get_instance()
-        q_trip = IE.extract_triples([preprocess_question(question)])[0]
 if __name__ == '__main__':
     main()
