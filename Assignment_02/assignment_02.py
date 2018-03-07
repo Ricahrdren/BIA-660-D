@@ -306,7 +306,7 @@ splits_select.select_by_visible_text('First Inning')
 
 # In[52]:
 
-
+time.sleep(5)
 AL_bar.click()
 
 # In[53]:
@@ -360,7 +360,7 @@ df4.drop("", axis=1)
 
 # In[61]:
 
-
+time.sleep(5)
 NL_bar.click()
 
 # In[62]:
@@ -563,7 +563,7 @@ RF.drop("", axis=1)
 
 # In[92]:
 
-
+time.sleep(5)
 position_select.select_by_visible_text('CF')
 
 # In[93]:
@@ -603,7 +603,7 @@ CF.drop("", axis=1)
 
 # In[97]:
 
-
+time.sleep(5)
 position_select.select_by_visible_text('LF')
 
 # In[98]:
