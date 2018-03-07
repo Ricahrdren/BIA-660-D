@@ -36,7 +36,7 @@ import time
 # In[6]:
 
 
-driver = webdriver.Firefox(executable_path=r'/Users/richard/Downloads/geckodriver 2')
+driver = webdriver.Firefox(executable_path=r'geckodriver')
 
 # In[7]:
 
