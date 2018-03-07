@@ -995,32 +995,51 @@ player_list
 # In[14]:
 
 
+data = []
 for a in player_list:
-    player_name_bar = driver.find_element_by_link_text(a)
-    # player_name = driver.find_element_by_css_selector('#_715571520275262687 > tbody:nth-child(36) > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)')
-    player_name_bar.click()
-    wait = WebDriverWait(driver, 10)
-    player_bio = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'player-bio')))
-    # p_born = driver.find_element_by_css_selector('div.player-bio:nth-child(2) > ul:nth-child(2) > li:nth-child(4) > span:nth-child(1)').text
-    for a in latin_coun_list:
-        if a in player_bio.text:
-            # born = a.find_element_by_class_name('player-bio').text
-            # if country in born:
-            player_name = driver.find_element_by_class_name('full-name').text
-            normal_delay = random.normalvariate(3, 0.5)
-            time.sleep(normal_delay)
-            # player_team=driver.find_element_by_class_name('dropdown.team')
-            datahtml = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'dropdown.team'))).text
-            # datahtml=driver.find_element_by_class_name('dropdown.team').text
-            team_name = datahtml.split('\n')[0].strip()
-            # soup = bs4.BeautifulSoup(datahtml,"html5lib")
-            # player_team_update=soup.find('span', attrs={'data-bind': 'text: selectedTeamLabel'}).text
-            print('player_name:', player_name)
-            print('team_name:', team_name)
+    player_name_bar = driver.find_elements_by_link_text(a)
+    for k in range(len(player_name_bar)):
+        player_name_bar_temp = driver.find_elements_by_link_text(a)
 
-    driver.back()
-    normal_delay = random.normalvariate(3, 0.5)
-    time.sleep(normal_delay)
+        # player_name = driver.find_element_by_css_selector('#_715571520275262687 > tbody:nth-child(36) > tr:nth-child(1) > td:nth-child(2) > a:nth-child(1)')
+        player_name_bar_temp[k].click()
+        wait = WebDriverWait(driver, 10)
+        player_bio = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'player-bio')))
+        # p_born = driver.find_element_by_css_selector('div.player-bio:nth-child(2) > ul:nth-child(2) > li:nth-child(4) > span:nth-child(1)').text
+        for b in latin_coun_list:
+            if b in player_bio.text:
+                # born = a.find_element_by_class_name('player-bio').text
+                # if country in born:
+                player_name = driver.find_element_by_class_name('full-name').text
+                normal_delay = random.normalvariate(20, 0.5)
+                time.sleep(normal_delay)
+                # player_team=driver.find_element_by_class_name('dropdown.team')
+                datahtml = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'dropdown.team'))).text
+                # datahtml=driver.find_element_by_class_name('dropdown.team').text
+                team_name = datahtml.split('\n')[0].strip()
+                # soup = bs4.BeautifulSoup(datahtml,"html5lib")
+                # player_team_update=soup.find('span', attrs={'data-bind': 'text: selectedTeamLabel'}).text
+                print('player_name:', player_name)
+                data.append(player_name)
+                print('team_name:', team_name)
+                data.append(team_name)
+
+        driver.back()
+        normal_delay = random.normalvariate(20, 0.5)
+        time.sleep(normal_delay)
+
+head = ['Players','Team']
+context_5 =[]
+for i in range(int(len(data)/len(head))):
+    s= data[i*len(head):(i+1)*len(head)]
+    context_5.append(s)
+context_5
+
+head = ['Players','Team']
+df_q5=pd.DataFrame(columns= head)
+for i in range(16):
+    df_q5.loc[i]= context_5[i]
+df_q5.to_csv('/Users/richard/Desktop/660D Web Analytics/q5.csv')
 
 # ### Question 6 ###
 
