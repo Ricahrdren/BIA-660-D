@@ -791,24 +791,24 @@ max_hr_team_name
 # In[134]:
 
 
-df2.to_csv('/Users/richard/Desktop/660D Web Analytics/2015_AL_data.csv')
+df2.to_csv('2015_AL_data.csv')
 
 # In[135]:
 
 
-df3.to_csv('/Users/richard/Desktop/660D Web Analytics/2015_NL_data.csv')
+df3.to_csv('2015_NL_data.csv')
 
 # In[136]:
 
 
-AL_data_2015 = pd.read_csv('/Users/richard/Desktop/660D Web Analytics/2015_AL_data.csv')
+AL_data_2015 = pd.read_csv('2015_AL_data.csv')
 HR_mean_AL = AL_data_2015['HR'].mean()
 HR_mean_AL
 
 # In[137]:
 
 
-NL_data_2015 = pd.read_csv('/Users/richard/Desktop/660D Web Analytics/2015_NL_data.csv')
+NL_data_2015 = pd.read_csv('2015_NL_data.csv')
 HR_mean_NL = NL_data_2015['HR'].mean()
 HR_mean_NL
 
@@ -825,24 +825,24 @@ else:
 # In[140]:
 
 
-df4.to_csv("/Users/richard/Desktop/660D Web Analytics/2015_AL_data_firstinning.csv")
+df4.to_csv("2015_AL_data_firstinning.csv")
 
 # In[141]:
 
 
-df5.to_csv('/Users/richard/Desktop/660D Web Analytics/2015_NL_data_firstinning.csv')
+df5.to_csv('2015_NL_data_firstinning.csv')
 
 # In[142]:
 
 
-AL_data_2015_first_inning = pd.read_csv('/Users/richard/Desktop/660D Web Analytics/2015_AL_data_firstinning.csv')
+AL_data_2015_first_inning = pd.read_csv('2015_AL_data_firstinning.csv')
 HR_mean_AL_first_inning = AL_data_2015_first_inning['HR'].mean()
 HR_mean_AL_first_inning
 
 # In[143]:
 
 
-NL_data_2015_first_inning = pd.read_csv('/Users/richard/Desktop/660D Web Analytics/2015_NL_data_firstinning.csv')
+NL_data_2015_first_inning = pd.read_csv('2015_NL_data_firstinning.csv')
 HR_mean_NL_first_inning = NL_data_2015_first_inning['HR'].mean()
 HR_mean_NL_first_inning
 
@@ -867,7 +867,7 @@ new
 # In[28]:
 
 
-new = pd.read_csv('/Users/richard/Desktop/660D Web Analytics/over30_maxavg_player.csv')
+new = pd.read_csv('over30_maxavg_player.csv')
 
 # In[29]:
 
@@ -881,7 +881,7 @@ print('position:', position)
 # In[154]:
 
 
-new.to_csv('/Users/richard/Desktop/660D Web Analytics/over30_maxavg_player.csv')
+new.to_csv('over30_maxavg_player.csv')
 
 # #### b) ####
 
@@ -930,12 +930,33 @@ LF_position = LFnew.iloc[0, 5]
 print('LF_max_AVG_Player_name:', LF_max_AVG_Player_name)
 print('LF_position:', LF_position)
 
+
+RF= RFnew['Player'][0]
+RF_AVG=RFnew['AVG'][0]
+CF=CFnew['Player'][0]
+CF_AVG=CFnew['AVG'][0]
+LF=LFnew['Player'][0]
+LF_AVG=LFnew['AVG'][0]
+
+if RF_AVG > CF_AVG:
+    print('player:', RF)
+else:
+    print('player:', CF)
+
+
+if RF_AVG > LF_AVG:
+    print('player:', RF)
+else:
+    print('player:', LF)
+
+RF= RFnew['Player'][0]
+RF
 # In[168]:
 
 
-RFnew.to_csv('/Users/richard/Desktop/660D Web Analytics/RF.csv')
-CFnew.to_csv('/Users/richard/Desktop/660D Web Analytics/CF.csv')
-LFnew.to_csv('/Users/richard/Desktop/660D Web Analytics/LF.csv')
+RFnew.to_csv('RF.csv')
+CFnew.to_csv('CF.csv')
+LFnew.to_csv('LF.csv')
 
 # ### Question 4  Answer ###
 
@@ -959,7 +980,7 @@ print('AL_regualr_2015_team:', AL_regualr_2015_team)
 # In[174]:
 
 
-AL_regular_2015.to_csv('/Users/richard/Desktop/660D Web Analytics/AL_regular_2015.csv')
+AL_regular_2015.to_csv('AL_regular_2015.csv')
 
 # ### Question 5 Answer ###
 
@@ -1039,7 +1060,7 @@ head = ['Players','Team']
 df_q5=pd.DataFrame(columns= head)
 for i in range(16):
     df_q5.loc[i]= context_5[i]
-df_q5.to_csv('/Users/richard/Desktop/660D Web Analytics/q5.csv')
+df_q5.to_csv('q5.csv')
 
 # ### Question 6 ###
 
@@ -1129,4 +1150,10 @@ for a in ss:
 
 
 final
+
+df_q6=pd.DataFrame(columns=['Home Team','Away team','Day', 'Stadium','City','State'])
+for i in range(164):
+    df_q6.loc[i]= final[i]
+
+df_q6.to_csv('q6.csv')
 
